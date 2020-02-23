@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Options;
+using TrackSeries.TheTVDB.Client.Languages;
 
 namespace TrackSeries.TheTVDB.Client
 {
@@ -15,6 +16,11 @@ namespace TrackSeries.TheTVDB.Client
             if(!Uri.TryCreate(options.BaseAddress, UriKind.Absolute, out var _))
             {
                 options.BaseAddress = "http://api.thetvdb.com";
+            }
+
+            if (string.IsNullOrEmpty(options.AcceptedLanguage))
+            {
+                options.AcceptedLanguage = "en";
             }
         }
     }

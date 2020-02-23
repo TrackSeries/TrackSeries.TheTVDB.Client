@@ -1,4 +1,6 @@
-﻿namespace TrackSeries.TheTVDB.Client.Series
+﻿using System.Collections.Generic;
+
+namespace TrackSeries.TheTVDB.Client.Series
 {
     public class Serie
     {
@@ -10,13 +12,13 @@
 
         public string AirsTime { get; set; }
 
-        public string[] Aliases { get; set; }
+        public List<string> Aliases { get; set; }
 
         public string Banner { get; set; }
 
         public string FirstAired { get; set; }
 
-        public string[] Genre { get; set; }
+        public List<string> Genre { get; set; }
 
         public int Id { get; set; }
 
@@ -41,26 +43,15 @@
         /// This has happened before.</para>
         /// </summary>
         public string SeriesId { get; set; }
-
         public string SeriesName { get; set; }
-
         public decimal? SiteRating { get; set; }
-
         public int? SiteRatingCount { get; set; }
-
         public string Slug { get; set; }
-
         public string Status { get; set; }
-
-        // ReSharper disable once InconsistentNaming
         public string Zap2itId { get; set; }
-
         public int? Season { get; set; }
-
         public string Poster { get; set; }
-
         public string FanArt { get; set; }
-
         public string Language { get; set; }
     }
 }

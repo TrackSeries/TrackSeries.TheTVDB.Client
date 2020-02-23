@@ -26,5 +26,7 @@ namespace TrackSeries.TheTVDB.Client.Authentication
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task" />.The task object representing the asynchronous operation.</returns>
         Task RefreshTokenAsync(CancellationToken cancellationToken = default);
 
+        void LogoutCurrentUser();
+
     }
 }

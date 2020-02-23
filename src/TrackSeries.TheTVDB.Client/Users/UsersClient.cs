@@ -1,90 +1,83 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using TrackSeries.TheTVDB.Client.Models;
-using TrackSeries.TheTVDB.Client.Serializer;
 
 namespace TrackSeries.TheTVDB.Client.Users
 {
-    internal class UsersClient : IUsersClient
+    internal class UsersClient : BaseClient, IUsersClient
     {
-        private readonly HttpClient _client;
-
-        internal UsersClient(HttpClient client)
+        internal UsersClient(HttpClient client, IOptions<TVDBClientOptions> options, TVDBContext context) : base(client, options, context)
         {
-            _client = client;
         }
 
-        public Task<TVDBResponse<UserRatings[]>> AddEpisodeRatingAsync(int episodeId, decimal rating, CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> AddEpisodeRatingAsync(int episodeId, decimal rating, CancellationToken cancellationToken = default)
         {
             return AddRatingAsync(RatingType.Episode, episodeId, rating, cancellationToken);
         }
 
-        public Task<TVDBResponse<UserRatings[]>> AddImageRatingAsync(int imageId, decimal rating, CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> AddImageRatingAsync(int imageId, decimal rating, CancellationToken cancellationToken = default)
         {
             return AddRatingAsync(RatingType.Image, imageId, rating, cancellationToken);
         }
 
-        public async Task<TVDBResponse<UserRatings[]>> AddRatingAsync(
+        public async Task<TVDBResponse<List<UserRatings>>> AddRatingAsync(
             RatingType itemType,
             int itemId,
             decimal rating,
             CancellationToken cancellationToken = default)
         {
-            return await _client
-                .PutJsonAsync<TVDBResponse<UserRatings[]>>($"/user/ratings/{itemType.ToPascalCase()}/{itemId}/{rating}", cancellationToken)
+            return await PutJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/{itemType.ToPascalCase()}/{itemId}/{rating}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public Task<TVDBResponse<UserRatings[]>> AddSeriesRatingAsync(int seriesId, decimal rating, CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> AddSeriesRatingAsync(int seriesId, decimal rating, CancellationToken cancellationToken = default)
         {
             return AddRatingAsync(RatingType.Series, seriesId, rating, cancellationToken);
         }
 
         public async Task<TVDBResponse<UserFavorites>> AddToFavoritesAsync(int seriesId, CancellationToken cancellationToken = default)
         {
-            return await _client
-                .PutJsonAsync<TVDBResponse<UserFavorites>>($"/user/favorites/{seriesId}", cancellationToken)
+            return await PutJsonAsync<TVDBResponse<UserFavorites>>($"/user/favorites/{seriesId}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async Task<TVDBResponse<User>> GetAsync(CancellationToken cancellationToken = default)
         {
-            return await _client.GetJsonAsync<TVDBResponse<User>>("/user", cancellationToken).ConfigureAwait(false);
+            return await GetJsonAsync<TVDBResponse<User>>("/user", cancellationToken).ConfigureAwait(false);
         }
 
-        public Task<TVDBResponse<UserRatings[]>> GetEpisodesRatingsAsync(CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> GetEpisodesRatingsAsync(CancellationToken cancellationToken = default)
         {
             return GetRatingsAsync(RatingType.Episode, cancellationToken);
         }
 
         public async Task<TVDBResponse<UserFavorites>> GetFavoritesAsync(CancellationToken cancellationToken = default)
         {
-            return await _client
-                .GetJsonAsync<TVDBResponse<UserFavorites>>("/user/favorites", cancellationToken)
+            return await GetJsonAsync<TVDBResponse<UserFavorites>>("/user/favorites", cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public Task<TVDBResponse<UserRatings[]>> GetImagesRatingsAsync(CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> GetImagesRatingsAsync(CancellationToken cancellationToken = default)
         {
             return GetRatingsAsync(RatingType.Image, cancellationToken);
         }
 
-        public async Task<TVDBResponse<UserRatings[]>> GetRatingsAsync(CancellationToken cancellationToken = default)
+        public async Task<TVDBResponse<List<UserRatings>>> GetRatingsAsync(CancellationToken cancellationToken = default)
         {
-            return await _client
-                .GetJsonAsync<TVDBResponse<UserRatings[]>>("/user/ratings", cancellationToken)
+            return await GetJsonAsync<TVDBResponse<List<UserRatings>>>("/user/ratings", cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public async Task<TVDBResponse<UserRatings[]>> GetRatingsAsync(RatingType type, CancellationToken cancellationToken = default)
+        public async Task<TVDBResponse<List<UserRatings>>> GetRatingsAsync(RatingType type, CancellationToken cancellationToken = default)
         {
-            return await _client
-                .GetJsonAsync<TVDBResponse<UserRatings[]>>($"/user/ratings/query?itemType={type.ToPascalCase()}", cancellationToken)
+            return await GetJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/query?itemType={type.ToPascalCase()}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public Task<TVDBResponse<UserRatings[]>> GetSeriesRatingsAsync(CancellationToken cancellationToken = default)
+        public Task<TVDBResponse<List<UserRatings>>> GetSeriesRatingsAsync(CancellationToken cancellationToken = default)
         {
             return GetRatingsAsync(RatingType.Series, cancellationToken);
         }
@@ -96,8 +89,7 @@ namespace TrackSeries.TheTVDB.Client.Users
 
         public async Task<TVDBResponse<UserFavorites>> RemoveFromFavoritesAsync(int seriesId, CancellationToken cancellationToken = default)
         {
-            return await _client
-                .DeleteJsonAsync<TVDBResponse<UserFavorites>>($"/user/favorites/{seriesId}", cancellationToken)
+            return await DeleteJsonAsync<TVDBResponse<UserFavorites>>($"/user/favorites/{seriesId}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -108,8 +100,7 @@ namespace TrackSeries.TheTVDB.Client.Users
 
         public async Task RemoveRatingAsync(RatingType itemType, int itemId, CancellationToken cancellationToken = default)
         {
-            await _client
-                .DeleteAsync($"/user/ratings/{itemType.ToPascalCase()}/{itemId}", cancellationToken)
+            await SendAsync(new HttpRequestMessage(HttpMethod.Delete, $"/user/ratings/{itemType.ToPascalCase()}/{itemId}"), cancellationToken)
                 .ConfigureAwait(false);
         }
 

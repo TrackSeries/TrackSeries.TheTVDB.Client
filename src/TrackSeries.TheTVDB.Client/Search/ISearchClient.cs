@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using TrackSeries.TheTVDB.Client.Models;
 
@@ -18,7 +19,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// each value represents a property by which the search is performed</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesAsync(
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesAsync(
             string value,
             SearchParameter parameterKey,
             CancellationToken cancellationToken = default);
@@ -31,7 +32,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// <param name="parameterKey">Search parameter as a string.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesAsync(
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesAsync(
             string value,
             string parameterKey,
             CancellationToken cancellationToken = default);
@@ -43,7 +44,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// <param name="imdbId">The imdb ID of the series</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesByImdbIdAsync(string imdbId, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesByImdbIdAsync(string imdbId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /search/series]</para>
@@ -52,7 +53,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// <param name="name">The series name</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesByNameAsync(string name, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesByNameAsync(string name, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /search/series]</para>
@@ -61,7 +62,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// <param name="zap2ItId">The Zap2It ID of the series</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesByZap2ItIdAsync(string zap2ItId, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesByZap2ItIdAsync(string zap2ItId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /search/series]</para>
@@ -70,7 +71,7 @@ namespace TrackSeries.TheTVDB.Client.Search
         /// <param name="slug">The slug of the series</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<SeriesSearchResult[]>> SearchSeriesBySlugAsync(string slug, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesBySlugAsync(string slug, CancellationToken cancellationToken = default);
 
     }
 }

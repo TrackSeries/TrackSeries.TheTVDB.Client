@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using TrackSeries.TheTVDB.Client.Models;
@@ -17,7 +18,7 @@ namespace TrackSeries.TheTVDB.Client.Updates
         /// <param name="fromTime">Time to start your date range.</param>        
         /// /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<Update[]>> GetAsync(DateTime fromTime, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<Update>>> GetAsync(DateTime fromTime, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /updated/query]</para>
@@ -28,7 +29,7 @@ namespace TrackSeries.TheTVDB.Client.Updates
         /// <param name="toTime">Time to end your date range. Must be one week from fromTime</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<Update[]>> GetAsync(DateTime fromTime, DateTime toTime, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<Update>>> GetAsync(DateTime fromTime, DateTime toTime, CancellationToken cancellationToken = default);
 
     }
 }

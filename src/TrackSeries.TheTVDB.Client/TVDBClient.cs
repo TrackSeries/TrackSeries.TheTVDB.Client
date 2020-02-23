@@ -12,15 +12,18 @@ namespace TrackSeries.TheTVDB.Client
 {
     public class TVDBClient : ITVDBClient
     {
-        public TVDBClient(HttpClient client, TVDBTokenAccessor tokenAccessor, IOptions<TVDBClientOptions> options)
+        public TVDBClient(
+            HttpClient client, IOptions<TVDBClientOptions> options)
         {
-            Series = new SeriesClient(client);
-            Search = new SearchClient(client);
-            Episodes = new EpisodesClient(client);
-            Updates = new UpdatesClient(client);
-            Languages = new LanguagesClient(client);
-            Users = new UsersClient(client);
-            Authentication = new AuthenticationClient(client, tokenAccessor, options);
+            var context = new TVDBContext();
+
+            Series = new SeriesClient(client, options, context);
+            Search = new SearchClient(client, options, context);
+            Episodes = new EpisodesClient(client, options, context);
+            Updates = new UpdatesClient(client, options, context);
+            Languages = new LanguagesClient(client, options, context);
+            Users = new UsersClient(client, options, context);
+            Authentication = new AuthenticationClient(client, options, context);
         }
 
         public ISeriesClient Series { get; }

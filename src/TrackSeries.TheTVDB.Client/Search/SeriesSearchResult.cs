@@ -1,9 +1,11 @@
-﻿namespace TrackSeries.TheTVDB.Client.Search
+﻿using System.Collections.Generic;
+
+namespace TrackSeries.TheTVDB.Client.Search
 {
 
     public class SeriesSearchResult
     {
-        public string[] Aliases { get; set; }
+        public List<string> Aliases { get; set; }
 
         public string Banner { get; set; }
         public string FanArt { get; set; }

@@ -1,24 +1,20 @@
 ﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using TrackSeries.TheTVDB.Client.Models;
-using TrackSeries.TheTVDB.Client.Serializer;
 
 namespace TrackSeries.TheTVDB.Client.Episodes
 {
-    internal class EpisodesClient : IEpisodesClient
+    internal class EpisodesClient : BaseClient, IEpisodesClient
     {
-        private readonly HttpClient _client;
-
-        public EpisodesClient(HttpClient client)
+        public EpisodesClient(HttpClient client, IOptions<TVDBClientOptions> options, TVDBContext context) : base(client, options, context)
         {
-            _client = client;
         }
 
         public async Task<TVDBResponse<EpisodeRecord>> GetAsync(int episodeId, CancellationToken cancellationToken = default)
         {
-            return await _client
-                .GetJsonAsync<TVDBResponse<EpisodeRecord>>($"/episodes/{episodeId}", cancellationToken)
+            return await GetJsonAsync<TVDBResponse<EpisodeRecord>>($"/episodes/{episodeId}", cancellationToken)
                 .ConfigureAwait(false);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using TrackSeries.TheTVDB.Client.Models;
 
@@ -17,7 +18,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// <param name="rating">The rating.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> AddEpisodeRatingAsync(int episodeId, decimal rating, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> AddEpisodeRatingAsync(int episodeId, decimal rating, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[PUT /user/ratings/{itemType}/{itemId}/{itemRating}]</para>
@@ -27,7 +28,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// <param name="rating">The rating.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> AddImageRatingAsync(int imageId, decimal rating, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> AddImageRatingAsync(int imageId, decimal rating, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[PUT /user/ratings/{itemType}/{itemId}/{itemRating}]</para>
@@ -38,7 +39,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// <param name="rating">The rating.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> AddRatingAsync(
+        Task<TVDBResponse<List<UserRatings>>> AddRatingAsync(
             RatingType itemType,
             int itemId,
             decimal rating,
@@ -52,7 +53,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// <param name="rating">The rating.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> AddSeriesRatingAsync(int seriesId, decimal rating, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> AddSeriesRatingAsync(int seriesId, decimal rating, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[PUT /user/favorites/{id}]</para>
@@ -77,7 +78,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> GetEpisodesRatingsAsync(CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> GetEpisodesRatingsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /user/favorites]</para>
@@ -93,7 +94,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> GetImagesRatingsAsync(CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> GetImagesRatingsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /user/ratings]</para>
@@ -101,7 +102,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> GetRatingsAsync(CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> GetRatingsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /user/ratings/query]</para>
@@ -110,7 +111,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// <param name="type">An enumeration that represents the type of rating to be retrieved. Can be  Series, Episode, Image</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> GetRatingsAsync(RatingType type, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> GetRatingsAsync(RatingType type, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /user/ratings/query]</para>
@@ -118,7 +119,7 @@ namespace TrackSeries.TheTVDB.Client.Users
         /// </summary>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<UserRatings[]>> GetSeriesRatingsAsync(CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<UserRatings>>> GetSeriesRatingsAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[DELETE /user/ratings/{itemType}/{itemId}]</para>

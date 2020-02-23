@@ -1,7 +1,9 @@
-﻿namespace TrackSeries.TheTVDB.Client.Users
+﻿using System.Collections.Generic;
+
+namespace TrackSeries.TheTVDB.Client.Users
 {
     public class UserFavorites
     {
-        public string[] Favorites { get; set; }
+        public List<string> Favorites { get; set; }
     }
 }

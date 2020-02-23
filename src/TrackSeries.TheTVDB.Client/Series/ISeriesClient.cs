@@ -19,7 +19,7 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="seriesId">The series ID</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<Actor[]>> GetActorsAsync(int seriesId, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<Actor>>> GetActorsAsync(int seriesId, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /series/{id}]</para>
@@ -47,7 +47,7 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="page">The page you want to retrieve.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<EpisodeRecord[]>> GetEpisodesAsync(int seriesId, int page, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<EpisodeRecord>>> GetEpisodesAsync(int seriesId, int page, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /series/{id}/episodes/query]</para>
@@ -58,7 +58,7 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="query">The structure by which the records are queried.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<EpisodeRecord[]>> GetEpisodesAsync(int seriesId, int page, EpisodeQuery query, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<EpisodeRecord>>> GetEpisodesAsync(int seriesId, int page, EpisodeQuery query, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /series/{id}/episodes/summary]</para>
@@ -87,7 +87,7 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<Image[]>> GetImagesAsync(int seriesId, ImagesQuery query, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, ImagesQuery query, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /series/{id}/images/query]</para>
@@ -97,7 +97,7 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
-        Task<TVDBResponse<Image[]>> GetImagesAsync(int seriesId, ImagesQueryAlternative query, CancellationToken cancellationToken = default);
+        Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, ImagesQueryAlternative query, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// <para>[GET /series/{id}/images]</para>

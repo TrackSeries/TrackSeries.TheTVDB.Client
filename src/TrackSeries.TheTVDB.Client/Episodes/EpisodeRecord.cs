@@ -1,4 +1,6 @@
-﻿namespace TrackSeries.TheTVDB.Client.Episodes
+﻿using System.Collections.Generic;
+
+namespace TrackSeries.TheTVDB.Client.Episodes
 {
     public class EpisodeRecord
     {
@@ -16,7 +18,7 @@
 
         public int? AirsBeforeSeason { get; set; }
 
-        public string[] Directors { get; set; }
+        public List<string> Directors { get; set; }
 
         public int? DvdChapter { get; set; }
 
@@ -32,7 +34,7 @@
 
         public string FirstAired { get; set; }
 
-        public string[] GuestStars { get; set; }
+        public List<string> GuestStars { get; set; }
 
         public int Id { get; set; }
 
@@ -64,7 +66,7 @@
 
         public string ThumbWidth { get; set; }
 
-        public string[] Writers { get; set; }
+        public List<string> Writers { get; set; }
 
         public string ContentRating { get; set; }
 
