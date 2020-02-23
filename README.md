@@ -3,7 +3,7 @@ TrackSeries TheTVDBClient
 
 .NET Client for TheTVDB API integrated with `IHttpClientFactory` and `IServiceCollection`.
 
-![Build](https://github.com/cjaliaga/TrackSeries.TheTVDB.Client/workflows/Build/badge.svg)
+![Build](https://github.com/TrackSeries/TrackSeries.TheTVDB.Client/workflows/Build/badge.svg) [![NuGet](https://img.shields.io/nuget/v/TrackSeries.TheTVDB.Client.svg?maxAge=2592000?style=flat)](https://www.nuget.org/packages/TrackSeries.TheTVDB.Client/)
 
 # Installing via NuGet
 
@@ -40,5 +40,3 @@ var userFavoriteSeries = await client.Users.GetFavoritesAsync();
 # Acknowledgements
 
 Big thanks to [HristoKolev](https://github.com/HristoKolev) for his awesome work on [TvDbSharper](https://github.com/HristoKolev/TvDbSharper).
-
-
