@@ -25,7 +25,7 @@ services.AddTVDBClient(options =>
     options.ApiKey = "Set here your API-KEY for TheTVDB";
 });
 ```
-The client will automatically manage tokens for you so you don't need to worry about it. In case you would like to authenticate specifically  to run actions over an specific TheTVDB user you can use the following:
+The client will automatically manage tokens for you so you don't need to worry about it. In case you would like to authenticate to run actions over an specific TheTVDB user you can use the following:
 
 ```C#
 await client.Authentication.AuthenticateAsync("Username", "UserKey");
