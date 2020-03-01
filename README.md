@@ -8,11 +8,11 @@ TrackSeries TheTVDBClient
 # Installing via NuGet
 
 ```
-dotnet add package TrackSeries.TheTVDB.Client --version 0.1.1-pre
+dotnet add package TrackSeries.TheTVDB.Client --version 0.1.3-pre
 ``` 
 
 ```
-Install-Package TrackSeries.TheTVDB.Client -Version 0.1.1-pre
+Install-Package TrackSeries.TheTVDB.Client -Version 0.1.3-pre
 ```
 
 # Getting Started
@@ -35,6 +35,15 @@ Now you will be able to use the endpoints under `Users`:
 
 ```C#
 var userFavoriteSeries = await client.Users.GetFavoritesAsync();
+```
+It's possible to share the context between all the instances of the client (token and language):
+
+```C#
+services.AddTVDBClient(options => 
+{
+    options.ApiKey = "Set here your API-KEY for TheTVDB";
+    options.ShareContextBetweenClients = true;
+});
 ```
 
 # Acknowledgements
