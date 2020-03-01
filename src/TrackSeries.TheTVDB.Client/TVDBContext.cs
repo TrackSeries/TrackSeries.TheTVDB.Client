@@ -1,6 +1,6 @@
 ﻿namespace TrackSeries.TheTVDB.Client
 {
-    internal class TVDBContext
+    public class TVDBContext
     {
         public string Token { get; private set; }
         public string Language { get; set; }

@@ -13,9 +13,13 @@ namespace TrackSeries.TheTVDB.Client
     public class TVDBClient : ITVDBClient
     {
         public TVDBClient(
-            HttpClient client, IOptions<TVDBClientOptions> options)
+            HttpClient client, IOptions<TVDBClientOptions> options, TVDBContext context)
         {
-            var context = new TVDBContext();
+            if (!options.Value.ShareContextBetweenClients)
+            {
+                // If we don't want to share the context, we are creating one just for this client
+                context = new TVDBContext();
+            }
 
             Series = new SeriesClient(client, options, context);
             Search = new SearchClient(client, options, context);

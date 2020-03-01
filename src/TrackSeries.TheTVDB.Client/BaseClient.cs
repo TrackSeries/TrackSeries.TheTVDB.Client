@@ -163,6 +163,13 @@ namespace TrackSeries.TheTVDB.Client
 
         protected async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken = default) 
         {
+            // If we don't have a token we don't want to wait since we know we will get an unauthorized. 
+            // Let's try to get a valid token first.
+            if(string.IsNullOrEmpty(_context.Token))
+            {
+                await TryObtainValidTokenAsync(cancellationToken);
+            }
+
             PrepareRequest(request);
             var response = await _client.SendAsync(request, cancellationToken);
 

@@ -15,8 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddTVDBClient(this IServiceCollection services, Action<TVDBClientOptions> configureOptions)
         {
             services.AddOptions();
-
             services.Configure(configureOptions);
+
+            services.TryAddSingleton<TVDBContext>();
 
             services.AddHttpClient<ITVDBClient, TVDBClient>((provider, client) =>
             {

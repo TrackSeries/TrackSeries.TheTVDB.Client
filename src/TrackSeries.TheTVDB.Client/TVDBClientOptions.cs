@@ -5,5 +5,6 @@
         public string ApiKey { get; set; }
         internal string BaseAddress { get; set; } = "https://api.thetvdb.com";
         public string AcceptedLanguage { get; set; } = "en";
+        public bool ShareContextBetweenClients { get; set; } = false;
     }
 }
