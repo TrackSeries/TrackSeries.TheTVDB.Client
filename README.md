@@ -8,11 +8,11 @@ TrackSeries TheTVDBClient
 # Installing via NuGet
 
 ```
-dotnet add package TrackSeries.TheTVDB.Client --version 0.1.3-pre
+dotnet add package TrackSeries.TheTVDB.Client --version 0.1.4
 ``` 
 
 ```
-Install-Package TrackSeries.TheTVDB.Client -Version 0.1.3-pre
+Install-Package TrackSeries.TheTVDB.Client -Version 0.1.4
 ```
 
 # Getting Started
