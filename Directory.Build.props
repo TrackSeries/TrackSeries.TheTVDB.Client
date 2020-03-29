@@ -6,11 +6,12 @@
     <Company>TrackSeries</Company>
     <Authors>TrackSeries; Carlos J. Aliaga</Authors>
     <PackageId>$(AssemblyName)</PackageId>
-    <PackageLicenseUrl>https://github.com/TrackSeries/TrackSeries.TheTVDB.Client/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/TrackSeries/TrackSeries.TheTVDB.Client</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/TrackSeries/TrackSeries.TheTVDB.Client</RepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning">
