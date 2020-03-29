@@ -6,14 +6,7 @@
     <AssemblyTitle>TrackSeries.TheTVDB.Client</AssemblyTitle>
     <PackageId>TrackSeries.TheTVDB.Client</PackageId>
     <Description>.NET Client for TheTVDB API integrated with IHttpClientFactory and IServiceCollection</Description>
-    <Authors>Carlos J. Aliaga</Authors>
-    <PackageLicenseUrl>https://github.com/TrackSeries/TrackSeries.TheTVDB.Client/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/TrackSeries/TrackSeries.TheTVDB.Client</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>git://github.com/TrackSeries/TrackSeries.TheTVDB.Client</RepositoryUrl>
     <PackageTags>TheTVDB;Client</PackageTags>
-    <Company>TrackSeries</Company>
-    <Version>0.1.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
