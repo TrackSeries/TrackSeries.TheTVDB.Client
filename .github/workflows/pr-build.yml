@@ -1,4 +1,4 @@
-name: TrackSeries.TheTVDB.HealthCheck PR Build
+name: PR Build
 
 on: [pull_request]
 
