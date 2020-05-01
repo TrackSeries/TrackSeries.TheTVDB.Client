@@ -9,7 +9,7 @@ namespace TrackSeries.TheTVDB.Client.Search
 
         public string Banner { get; set; }
         public string FanArt { get; set; }
-
+        public string Image { get; set; }
         public string Poster { get; set; }
 
         public string FirstAired { get; set; }
