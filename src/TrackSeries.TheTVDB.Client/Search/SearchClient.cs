@@ -10,8 +10,11 @@ namespace TrackSeries.TheTVDB.Client.Search
 {
     internal class SearchClient : BaseClient, ISearchClient
     {
+        private readonly TVDBClientOptions _options;
+
         public SearchClient(HttpClient client, IOptions<TVDBClientOptions> options, TVDBContext context) : base(client, options, context)
         {
+            _options = options.Value;
         }
 
         public Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesAsync(string value, SearchParameter parameterKey, CancellationToken cancellationToken = default)
@@ -22,7 +25,19 @@ namespace TrackSeries.TheTVDB.Client.Search
         public async Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesAsync(string value, string parameterKey, CancellationToken cancellationToken = default)
         {
             var url = $"/search/series?{parameterKey.ToPascalCase()}={WebUtility.UrlEncode(value)}";
-            return await GetJsonAsync<TVDBResponse<List<SeriesSearchResult>>>(url, cancellationToken).ConfigureAwait(false);
+            var response = await GetJsonAsync<TVDBResponse<List<SeriesSearchResult>>>(url, cancellationToken).ConfigureAwait(false);
+
+            if (_options.ReturnCompleteUrlForImages)
+            {
+                foreach (var result in response.Data)
+                {
+                    result.Image = ImageConverter.CheckAndConvertToCompleteUrl(result.Image);
+                    result.Poster = ImageConverter.CheckAndConvertToCompleteUrl(result.Poster);
+                    result.Banner = ImageConverter.CheckAndConvertToCompleteUrl(result.Banner);
+                }
+            }
+
+            return response;
         }
 
         public Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesByImdbIdAsync(string imdbId, CancellationToken cancellationToken = default)
