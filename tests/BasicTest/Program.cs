@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TrackSeries.TheTVDB.Client;
+using TrackSeries.TheTVDB.Client.Series;
 
 namespace BasicTest
 {
@@ -44,6 +45,12 @@ namespace BasicTest
                 .IncludeId()
                 .IncludeAirsDayOfWeek();
             });
+
+            var actors = await tvdb.Series.GetActorsAsync(121361);
+
+            var episodes = await tvdb.Series.GetEpisodesAsync(121361, 1);
+
+            var images = await tvdb.Series.GetImagesAsync(121361, new ImagesQuery());
 
             var episode = await tvdb.Episodes.GetAsync(6794892);
 
