@@ -97,6 +97,16 @@ namespace TrackSeries.TheTVDB.Client.Series
         /// <param name="query">The query.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
+        Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, Action<ImagesQuery> query, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// <para>[GET /series/{id}/images/query]</para>
+        /// <para>Query images for the given series ID.</para>
+        /// </summary>
+        /// <param name="seriesId">The series ID</param>
+        /// <param name="query">The query.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />.The task object representing the asynchronous operation.</returns>
         Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, ImagesQueryAlternative query, CancellationToken cancellationToken = default);
 
         /// <summary>

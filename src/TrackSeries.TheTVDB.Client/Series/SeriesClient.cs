@@ -110,6 +110,19 @@ namespace TrackSeries.TheTVDB.Client.Series
             return response.Headers.ToDictionary(h => h.Key, x => x.Value);
         }
 
+        public Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, Action<ImagesQuery> query, CancellationToken cancellationToken = default)
+        {
+            if (query is null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+
+            var imageQuery = new ImagesQuery();
+            query(imageQuery);
+
+            return GetImagesAsync(seriesId, imageQuery, cancellationToken);
+        }
+
         public async Task<TVDBResponse<List<Image>>> GetImagesAsync(int seriesId, ImagesQuery query, CancellationToken cancellationToken = default)
         {
            var response = await GetJsonAsync<TVDBResponse<List<Image>>>($"/series/{seriesId}/images/query?{query.ToQueryParams()}", cancellationToken).ConfigureAwait(false);
@@ -139,6 +152,8 @@ namespace TrackSeries.TheTVDB.Client.Series
 
             return response;
         }
+
+
 
         public async Task<TVDBResponse<ImagesSummary>> GetImagesSummaryAsync(int seriesId, CancellationToken cancellationToken = default)
         {

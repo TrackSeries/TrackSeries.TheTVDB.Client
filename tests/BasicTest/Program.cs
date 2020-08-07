@@ -50,11 +50,15 @@ namespace BasicTest
                 .IncludeAirsDayOfWeek();
             });
 
+            show = await tvdb.Series.GetAsync(121361);
+
             var actors = await tvdb.Series.GetActorsAsync(121361);
 
             var episodes = await tvdb.Series.GetEpisodesAsync(121361, 1);
 
-            var images = await tvdb.Series.GetImagesAsync(121361, new ImagesQuery());
+            var images = await tvdb.Series.GetImagesAsync(121361, options => {
+                options.KeyType = KeyType.Season;
+            });
 
             var episode = await tvdb.Episodes.GetAsync(6794892);
 
