@@ -23,9 +23,13 @@ namespace BasicTest
                 .AddUserSecrets(assembly: typeof(Program).Assembly)
                 .Build();
 
+            services.AddSingleton<IConfiguration>(configuration);
+
             services.AddTVDBClient(options =>
             {
                 options.ApiKey = configuration["ApiKey"];
+                options.ShareContextBetweenClients = true;
+                options.ReturnCompleteUrlForImages = true;
             });
 
             var provider = services.BuildServiceProvider();

@@ -12,10 +12,14 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddTVDBClient(this IServiceCollection services, Action<TVDBClientOptions> configureOptions)
+        public static IServiceCollection AddTVDBClient(this IServiceCollection services, Action<TVDBClientOptions> configureOptions = null)
         {
             services.AddOptions();
-            services.Configure(configureOptions);
+
+            if(configureOptions != null)
+            {
+                services.Configure(configureOptions);
+            }
 
             services.TryAddSingleton<TVDBContext>();
 
