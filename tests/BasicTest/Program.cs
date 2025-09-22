@@ -12,6 +12,9 @@ namespace BasicTest
     {
         static async Task Main(string[] args)
         {
+            // Run ImageConverter verification test first
+            ImageConverterManualTest.RunTests();
+
             var services = new ServiceCollection();
 
             services.AddLogging(configure =>
