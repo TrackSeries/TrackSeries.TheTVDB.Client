@@ -15,7 +15,7 @@ internal static class ImageConverter
             return input;
         }
 
-        if (!input.Contains(Banners))
+        if (!input.StartsWith(Banners))
         {
             input = Banners + input;
         }

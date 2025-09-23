@@ -67,6 +67,8 @@ class Program
         var rating = await tvdb.Users.AddSeriesRatingAsync(328724, 10);
         //var favorite = await tvdb.Users.AddToFavoritesAsync(328724);
 
+        var starwars = await tvdb.Series.GetAsync(420659);
+
         // Game of Thrones with information in English
         var gameofthrones = await tvdb.Series.GetAsync(121361);
 
