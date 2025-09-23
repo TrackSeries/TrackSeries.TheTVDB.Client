@@ -1,11 +1,10 @@
-﻿namespace TrackSeries.TheTVDB.Client.Users
+﻿namespace TrackSeries.TheTVDB.Client.Users;
+
+public class User
 {
-    public class User
-    {
-        public string FavoritesDisplaymode { get; set; }
+    public string FavoritesDisplaymode { get; set; }
 
-        public string Language { get; set; }
+    public string Language { get; set; }
 
-        public string UserName { get; set; }
-    }
+    public string UserName { get; set; }
 }

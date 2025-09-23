@@ -1,9 +1,8 @@
-﻿namespace TrackSeries.TheTVDB.Client.Users
+﻿namespace TrackSeries.TheTVDB.Client.Users;
+
+public class UserRatings
 {
-    public class UserRatings
-    {
-        public decimal? Rating { get; set; }
-        public int? RatingItemId { get; set; }
-        public string RatingType { get; set; }
-    }
+    public decimal? Rating { get; set; }
+    public int? RatingItemId { get; set; }
+    public string RatingType { get; set; }
 }

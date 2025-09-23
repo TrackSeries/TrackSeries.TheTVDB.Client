@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace TrackSeries.TheTVDB.Client
+namespace TrackSeries.TheTVDB.Client;
+
+internal static class DateTimeExtensions
 {
-    internal static class DateTimeExtensions
+    internal static long ToUnixEpochTime(this DateTime time)
     {
-        internal static long ToUnixEpochTime(this DateTime time)
-        {
-            return new DateTimeOffset(time).ToUnixTimeSeconds();
-        }
+        return new DateTimeOffset(time).ToUnixTimeSeconds();
     }
 }

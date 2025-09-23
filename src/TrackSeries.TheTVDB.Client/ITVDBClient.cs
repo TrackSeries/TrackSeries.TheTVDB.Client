@@ -6,16 +6,15 @@ using TrackSeries.TheTVDB.Client.Series;
 using TrackSeries.TheTVDB.Client.Updates;
 using TrackSeries.TheTVDB.Client.Users;
 
-namespace TrackSeries.TheTVDB.Client
+namespace TrackSeries.TheTVDB.Client;
+
+public interface ITVDBClient
 {
-    public interface ITVDBClient
-    {
-        IAuthenticationClient Authentication { get; }
-        IEpisodesClient Episodes { get; }
-        ILanguagesClient Languages { get; }
-        ISearchClient Search { get; }
-        ISeriesClient Series { get; }
-        IUpdatesClient Updates { get; }
-        IUsersClient Users { get; }
-    }
+    IAuthenticationClient Authentication { get; }
+    IEpisodesClient Episodes { get; }
+    ILanguagesClient Languages { get; }
+    ISearchClient Search { get; }
+    ISeriesClient Series { get; }
+    IUpdatesClient Updates { get; }
+    IUsersClient Users { get; }
 }

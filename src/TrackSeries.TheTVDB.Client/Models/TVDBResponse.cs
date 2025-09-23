@@ -1,11 +1,10 @@
-﻿namespace TrackSeries.TheTVDB.Client.Models
+﻿namespace TrackSeries.TheTVDB.Client.Models;
+
+public class TVDBResponse<TData>
 {
-    public class TVDBResponse<TData>
-    {
-        public TData Data { get; set; }
+    public TData Data { get; set; }
 
-        public Errors Errors { get; set; }
+    public Errors Errors { get; set; }
 
-        public Links Links { get; set; }
-    }
+    public Links Links { get; set; }
 }

@@ -1,17 +1,16 @@
-﻿namespace TrackSeries.TheTVDB.Client.Series
+﻿namespace TrackSeries.TheTVDB.Client.Series;
+
+public enum KeyType
 {
-    public enum KeyType
-    {
-        // ReSharper disable once IdentifierTypo
-        Fanart,
+    // ReSharper disable once IdentifierTypo
+    Fanart,
 
-        Poster,
+    Poster,
 
-        Season,
+    Season,
 
-        // ReSharper disable once IdentifierTypo
-        Seasonwide,
+    // ReSharper disable once IdentifierTypo
+    Seasonwide,
 
-        Series
-    }
+    Series
 }

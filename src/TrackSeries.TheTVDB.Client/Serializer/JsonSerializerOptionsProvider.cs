@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace TrackSeries.TheTVDB.Client.Serializer
+namespace TrackSeries.TheTVDB.Client.Serializer;
+
+internal static class JsonSerializerOptionsProvider
 {
-    internal static class JsonSerializerOptionsProvider
+    private static readonly Lazy<JsonSerializerOptions> _options = new(() =>
     {
-        private static readonly Lazy<JsonSerializerOptions> _options = new(() =>
+        var options = new JsonSerializerOptions
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                PropertyNameCaseInsensitive = true,
-            };
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            PropertyNameCaseInsensitive = true,
+        };
 
-            options.Converters.Add(new StringToNullableIntegerConverter());
-            return options;
-        });
+        options.Converters.Add(new StringToNullableIntegerConverter());
+        return options;
+    });
 
-        public static JsonSerializerOptions Options => _options.Value;
-    }
+    public static JsonSerializerOptions Options => _options.Value;
 }
