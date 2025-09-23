@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace TrackSeries.TheTVDB.Client.Series
+namespace TrackSeries.TheTVDB.Client.Series;
+
+public class EpisodesSummary
 {
-    public class EpisodesSummary
-    {
-        public string AiredEpisodes { get; set; }
+    public string AiredEpisodes { get; set; }
 
-        public List<string> AiredSeasons { get; set; }
+    public List<string> AiredSeasons { get; set; }
 
-        public string DvdEpisodes { get; set; }
+    public string DvdEpisodes { get; set; }
 
-        public List<string> DvdSeasons { get; set; }
-    }
+    public List<string> DvdSeasons { get; set; }
 }

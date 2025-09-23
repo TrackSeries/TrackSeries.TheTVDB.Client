@@ -1,9 +1,8 @@
-﻿namespace TrackSeries.TheTVDB.Client.Users
+﻿namespace TrackSeries.TheTVDB.Client.Users;
+
+public enum RatingType
 {
-    public enum RatingType
-    {
-        Series,
-        Episode,
-        Image
-    }
+    Series,
+    Episode,
+    Image
 }

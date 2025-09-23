@@ -1,7 +1,6 @@
-﻿namespace TrackSeries.TheTVDB.Client.Authentication
+﻿namespace TrackSeries.TheTVDB.Client.Authentication;
+
+internal class TokenResponse
 {
-    internal class TokenResponse
-    {
-        public string Token { get; set; }
-    }
+    public string Token { get; set; }
 }
