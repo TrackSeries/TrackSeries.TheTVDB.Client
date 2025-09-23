@@ -43,9 +43,5 @@
     <PackageReference Include="Microsoft.Net.Http.Headers" Version="9.0.9" />
     <!-- System.Text.Json, Configuration.Binder, and System.Net.Http.Json are built into .NET 9 -->
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.7.115" />
-  </ItemGroup>
 
 </Project>
