@@ -24,7 +24,7 @@ namespace TrackSeries.TheTVDB.Client.Search
 
         public async Task<TVDBResponse<List<SeriesSearchResult>>> SearchSeriesAsync(string value, string parameterKey, CancellationToken cancellationToken = default)
         {
-            var url = $"/search/series?{parameterKey.ToPascalCase()}={WebUtility.UrlEncode(value)}";
+            var url = $"/search/series?{parameterKey.ToCamelCase()}={WebUtility.UrlEncode(value)}";
             var response = await GetJsonAsync<TVDBResponse<List<SeriesSearchResult>>>(url, cancellationToken).ConfigureAwait(false);
 
             if (_options.ReturnCompleteUrlForImages)

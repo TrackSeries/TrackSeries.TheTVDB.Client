@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -38,7 +39,7 @@ namespace TrackSeries.TheTVDB.Client
         /// <returns>The response parsed as an object of the generic type.</returns>
         protected Task<T> GetJsonAsync<T>(string requestUri, CancellationToken cancellationToken = default)
             => SendJsonAsync<T>(HttpMethod.Get, requestUri, null, cancellationToken);
-
+            
         /// <summary>
         /// Sends a DELETE request to the specified URI, and parses the JSON response body
         /// to create an object of the generic type.
@@ -49,7 +50,7 @@ namespace TrackSeries.TheTVDB.Client
         /// <returns>The response parsed as an object of the generic type.</returns>
         protected Task<T> DeleteJsonAsync<T>(string requestUri, CancellationToken cancellationToken = default)
             => SendJsonAsync<T>(HttpMethod.Delete, requestUri, null, cancellationToken);
-
+            
         /// <summary>
         /// Sends a POST request to the specified URI, including the specified <paramref name="content"/>
         /// in JSON-encoded format, and parses the JSON response body to create an object of the generic type.
@@ -140,14 +141,10 @@ namespace TrackSeries.TheTVDB.Client
 
             if (content != null)
             {
-                var requestJson = JsonSerializer.Serialize(content, JsonSerializerOptionsProvider.Options);
-                request.Content = new StringContent(requestJson, Encoding.UTF8, "application/json");
+                request.Content = JsonContent.Create(content, options: JsonSerializerOptionsProvider.Options);
             }
 
-            var response = await SendAsync(request, cancellationToken);
-
-            // Make sure the call was successful before we
-            // attempt to process the response content
+            var response = await SendAsync(request, cancellationToken).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             if (typeof(T) == typeof(IgnoreResponse))
@@ -156,8 +153,7 @@ namespace TrackSeries.TheTVDB.Client
             }
             else
             {
-                var stringContent = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<T>(stringContent, JsonSerializerOptionsProvider.Options);
+                return await response.Content.ReadFromJsonAsync<T>(JsonSerializerOptionsProvider.Options, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -167,17 +163,17 @@ namespace TrackSeries.TheTVDB.Client
             // Let's try to get a valid token first.
             if(string.IsNullOrEmpty(_context.Token))
             {
-                await TryObtainValidTokenAsync(cancellationToken);
+                await TryObtainValidTokenAsync(cancellationToken).ConfigureAwait(false);
             }
 
             PrepareRequest(request);
-            var response = await _client.SendAsync(request, cancellationToken);
+            var response = await _client.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-            if (response.StatusCode == HttpStatusCode.Unauthorized && await TryObtainValidTokenAsync(cancellationToken))
+            if (response.StatusCode == HttpStatusCode.Unauthorized && await TryObtainValidTokenAsync(cancellationToken).ConfigureAwait(false))
             {
                 request = CloneRequest(request);
                 PrepareRequest(request);
-                response = await _client.SendAsync(request, cancellationToken);
+                response = await _client.SendAsync(request, cancellationToken).ConfigureAwait(false);
             }
 
             return response;
@@ -186,12 +182,12 @@ namespace TrackSeries.TheTVDB.Client
         private async Task<bool> TryObtainValidTokenAsync(CancellationToken cancellationToken = default)
         {
             var authData = GetAuthorizationData();
-            var content = new StringContent(JsonSerializer.Serialize(authData, JsonSerializerOptionsProvider.Options), Encoding.UTF8, "application/json");
-            var authResponse = await _client.PostAsync("/login", content, cancellationToken);
+            
+            var authResponse = await _client.PostAsJsonAsync("/login", authData, JsonSerializerOptionsProvider.Options, cancellationToken).ConfigureAwait(false);
 
             if (authResponse.IsSuccessStatusCode)
             {
-                var token = await JsonSerializer.DeserializeAsync<TokenResponse>(await authResponse.Content.ReadAsStreamAsync(), JsonSerializerOptionsProvider.Options, cancellationToken);
+                var token = await authResponse.Content.ReadFromJsonAsync<TokenResponse>(JsonSerializerOptionsProvider.Options, cancellationToken).ConfigureAwait(false);
                 _context.UpdateToken(token.Token);
             }
 
@@ -234,6 +230,4 @@ namespace TrackSeries.TheTVDB.Client
 
         class IgnoreResponse { }
     }
-
-
 }

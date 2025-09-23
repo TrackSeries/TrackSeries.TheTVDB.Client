@@ -29,7 +29,7 @@ namespace TrackSeries.TheTVDB.Client.Users
             decimal rating,
             CancellationToken cancellationToken = default)
         {
-            return await PutJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/{itemType.ToPascalCase()}/{itemId}/{rating}", cancellationToken)
+            return await PutJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/{itemType.ToCamelCase()}/{itemId}/{rating}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -73,7 +73,7 @@ namespace TrackSeries.TheTVDB.Client.Users
 
         public async Task<TVDBResponse<List<UserRatings>>> GetRatingsAsync(RatingType type, CancellationToken cancellationToken = default)
         {
-            return await GetJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/query?itemType={type.ToPascalCase()}", cancellationToken)
+            return await GetJsonAsync<TVDBResponse<List<UserRatings>>>($"/user/ratings/query?itemType={type.ToCamelCase()}", cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -100,7 +100,7 @@ namespace TrackSeries.TheTVDB.Client.Users
 
         public async Task RemoveRatingAsync(RatingType itemType, int itemId, CancellationToken cancellationToken = default)
         {
-            await SendAsync(new HttpRequestMessage(HttpMethod.Delete, $"/user/ratings/{itemType.ToPascalCase()}/{itemId}"), cancellationToken)
+            await SendAsync(new HttpRequestMessage(HttpMethod.Delete, $"/user/ratings/{itemType.ToCamelCase()}/{itemId}"), cancellationToken)
                 .ConfigureAwait(false);
         }
 

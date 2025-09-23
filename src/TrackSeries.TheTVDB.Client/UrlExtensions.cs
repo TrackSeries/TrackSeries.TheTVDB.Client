@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace TrackSeries.TheTVDB.Client
 {
@@ -11,31 +10,43 @@ namespace TrackSeries.TheTVDB.Client
         {
             var parts = new List<string>();
 
-            foreach (var propertyInfo in typeof(T).GetTypeInfo().DeclaredProperties.OrderBy(info => info.Name))
+            // Use modern reflection - GetProperties() is more efficient than GetTypeInfo().DeclaredProperties
+            foreach (var propertyInfo in typeof(T).GetProperties().OrderBy(info => info.Name))
             {
                 var value = propertyInfo.GetValue(obj);
 
                 if (value != null)
                 {
-                    parts.Add($"{propertyInfo.Name.ToPascalCase()}={Uri.EscapeDataString(value.ToString())}");
+                    parts.Add($"{propertyInfo.Name.ToCamelCase()}={Uri.EscapeDataString(value.ToString())}");
                 }
             }
 
             return string.Join("&", parts);
         }
 
-        internal static string ToPascalCase(this string name)
+        internal static string ToCamelCase(this string name)
         {
+            if (string.IsNullOrEmpty(name) || name.Length == 1)
+                return name?.ToLowerInvariant() ?? string.Empty;
+
+            // Use span for better performance in .NET 8/9
+#if NET8_0_OR_GREATER
+            return string.Create(name.Length, name, (span, value) =>
+            {
+                value.AsSpan().CopyTo(span);
+                span[0] = char.ToLowerInvariant(span[0]);
+            });
+#else
+            // Fallback for .NET Standard 2.0
             var array = name.ToCharArray();
-
-            array[0] = char.ToLower(array[0]);
-
+            array[0] = char.ToLowerInvariant(array[0]);
             return new string(array);
+#endif
         }
 
-        internal static string ToPascalCase(this Enum @enum)
+        internal static string ToCamelCase(this Enum @enum)
         {
-            return @enum.ToString().ToPascalCase();
+            return @enum.ToString().ToCamelCase();
         }
     }
 }
